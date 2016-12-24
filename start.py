@@ -111,7 +111,12 @@ class App:
             print('5) Обход в ширину')
         print('Введите цифру команды:')
 
+    def print_title(self):
+        with open('logo.txt', 'r') as logo:
+            print(logo.read())
+
     def run(self):
+        self.print_title()
         while True:
             self.print_menu()
 
