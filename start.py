@@ -8,6 +8,12 @@ def try_exec(decorating):
     def wrapper(*args):
         try:
             return decorating(*args)
+        except FileExistsError:
+            print()
+            print('Такой файл уже существует, введите другое имя файла')
+        except FileNotFoundError:
+            print()
+            print('Файл с данным именем не найден')
         except IOError:
             print()
             print('Невозможно открыть файл')
@@ -85,7 +91,7 @@ class App:
     def new_graph(self):
         print('\nВведите путь к файлу:')
         path = input()
-        with open(path, 'r') as file:
+        with open(path, 'x') as file:
             self.current_file = path
         content = """# введите список смежности графа\n# пример:\n# 1)2,3\n# 2)1,3\n# 3)2,1\n"""
         self.edit_graph(content)
